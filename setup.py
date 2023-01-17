@@ -13,7 +13,7 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = '',
-    py_modules = ['my_tool', 'app'],
+    py_modules = ['match_tool'],
     packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.7',
@@ -23,6 +23,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        cooltool=my_tool:cli
+        match=match_tool:cli
     '''
 )
