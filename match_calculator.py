@@ -3,12 +3,23 @@ This class is the central functionality of the Match Calculator cli.
 It contains all the logic called by the click tool.
 """
 
-class MatchCalculator:
+"""
+print(sorted(key_value.items(), key=lambda kv:
+                 (kv[1], kv[0])))
+"""
 
-    match_matrix = {}
+class MatchCalculator:
+    """
+    
+    """
+    match_table = {}
     league = None
 
     def __init__(self, league=""):
+        """
+
+        :param league:
+        """
         self.league = league
 
     def read(self, file_path: str):
@@ -23,14 +34,62 @@ class MatchCalculator:
         for line in file:
             match_list.append(line)
 
-        self.calculate_score(file_input=match_list)
+        self.calculate(file_input=match_list)
 
     def line(self, line: str):
-        self.calculate_score(line_input=line)
-        print(line)
+        """
 
-    def calculate_score(self, file_input: list, line_input: str):
-        print(file_input)
-        print(line_input)
+        :param line:
+        :return:
+        """
+        self.calculate(line_input=line)
 
+    def calculate_match_result(self, result: str):
+        """
 
+        :param result:
+        :return:
+        """
+        in_scores = result.split(",")
+
+        team_one_name = in_scores[0][0:-2]
+        team_two_name = in_scores[1][0:-2]
+
+        if team_one_name not in self.match_table.keys():
+            self.match_table[team_one_name] = 0
+
+        if team_two_name not in self.match_table.keys():
+            self.match_table[team_two_name] = 0
+
+        team_one_score = int(in_scores[0][:-1])
+        team_two_score = int(in_scores[1][:-1])
+
+        if team_one_score > team_two_score:
+            self.match_table[team_one_name] += 3
+        elif team_one_score < team_two_score:
+            self.match_table[team_two_name] += 3
+        else:
+            self.match_table[team_one_name] += 1
+            self.match_table[team_two_name] += 1
+
+    def calculate(self, file_input: list, line_input: str):
+        """
+
+        :param file_input:
+        :param line_input:
+        :return:
+        """
+        if file_input:
+            for match in file_input:
+                self.calculate_match_result(match)
+        else:
+            self.calculate_match_result(line_input)
+
+    def get_match_results(self) -> str:
+        """
+
+        :return:
+        """
+        for key in self.match_table.keys():
+            self.match_table[key]
+        return {}
