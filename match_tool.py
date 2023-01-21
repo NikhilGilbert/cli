@@ -1,4 +1,5 @@
 import click
+from match_calculator import MatchCalculator as mc
 
 @click.group()
 def cli():
@@ -13,7 +14,8 @@ def file(path):
 
     try:
         file = open(path, "r")
-        click.echo(file.read())
+        results = mc.calculate(file)
+        click.echo(results)
     except:
         click.echo("No file with that name.")
 
