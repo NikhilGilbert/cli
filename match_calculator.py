@@ -37,6 +37,8 @@ class MatchCalculator:
 
         self._calculate(file_input=match_list)
 
+        file.close()
+
     def line(self, line: str):
         """
         This function is called in the cli when someone passes and input through the cmd line
@@ -116,6 +118,5 @@ class MatchCalculator:
             else:
                 match_results += f'{position_count}. {sorted_match_table[i][0]}, {sorted_match_table[i][1]} pts\n'
                 carry += 1
-
 
         return match_results
