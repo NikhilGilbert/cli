@@ -11,7 +11,7 @@ class MatchCalculator:
     def line(self, line: str): Read in a single match result using cmd line input
     def _calculate_match_result(self, result: str): Method that performs scoring logic
     def _calculate(self, file_input: list, line_input: str): Calls _calculate_match_result for both line and file input
-    def get_match_results(self) -> str:
+    def get_match_results(self) -> str: Get formatted match results
     """
 
     _match_table = {}
@@ -46,9 +46,8 @@ class MatchCalculator:
 
     def _calculate_match_result(self, result: str):
         """
-
-        :param result:
-        :return:
+        Core logic of match result calculations
+        :param result: the string results containing the match score
         """
         in_scores = result.strip().split(",")
 
@@ -85,17 +84,38 @@ class MatchCalculator:
         else:
             self._calculate_match_result(line_input)
 
+    def _sort_match_table(self) -> list:
+        """
+        Return a list of team tuples sorted by their score then name
+        :return: list that is a sorted version of match table
+        """
+        sorted_match_table = sorted(self._match_table.items(), key=lambda kv: (-kv[1], kv[0]))
+
+        return sorted_match_table
+
+
     def get_match_results(self) -> str:
         """
         This file takes the match_table dict and orders the team based on performance,
         then alphabetically and displays it in the form of a string
         :return: String formatted to contain the correct match table score output
         """
-        sorted_match_table = sorted(self._match_table.items(), key=lambda kv:(-kv[1], kv[0]))
-        position_count = 1
+        sorted_match_table = self._sort_match_table()
+        position_count = 0
+        carry = 1
+        current_score = -1
         match_results = ""
-        print(sorted_match_table)
-        # for key in sorted_match_table.keys():
-        #     match_results += f'{position_count}. {key}, {self.match_table[key]} pts + \n'
+
+        for i in range(len(sorted_match_table)):
+            if current_score != sorted_match_table[i][1]:
+                current_score = sorted_match_table[i][1]
+                position_count += carry
+                carry = 0
+            if i+1 == len(sorted_match_table):
+                match_results += f'{position_count}. {sorted_match_table[i][0]}, {sorted_match_table[i][1]} pts'
+            else:
+                match_results += f'{position_count}. {sorted_match_table[i][0]}, {sorted_match_table[i][1]} pts\n'
+                carry += 1
+
 
         return match_results
