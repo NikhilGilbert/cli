@@ -5,7 +5,7 @@ class TestMatchCalculator(unittest.TestCase):
 
     def test_calculate_score(self):
         mc = MatchCalculator()
-        mc.read("match_test_rev.txt")
+        mc.read("match_test.txt")
         match_results = mc.get_match_results()
         self.assertEqual(match_results, "")
 

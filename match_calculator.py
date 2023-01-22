@@ -91,7 +91,7 @@ class MatchCalculator:
         then alphabetically and displays it in the form of a string
         :return: String formatted to contain the correct match table score output
         """
-        sorted_match_table = sorted(self._match_table.items(), key=lambda kv:(kv[1], kv[0]), reverse=True)
+        sorted_match_table = sorted(self._match_table.items(), key=lambda kv:(-kv[1], kv[0]))
         position_count = 1
         match_results = ""
         print(sorted_match_table)
