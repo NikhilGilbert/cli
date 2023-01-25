@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = fh.read()
 setup(
-    name = 'mytool',
+    name = 'match_tool_by_nikhilgilbert',
     version = '0.0.1',
     author = 'Nikhil Gilbert',
     author_email = 'gilbert.nikhil@gmail.com',
