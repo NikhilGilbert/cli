@@ -48,10 +48,8 @@ class MatchCalculator:
         while True:
             user_input = input('Enter a match result with format:("Team" "Score", "Team" "Score") [Press Enter to exit]: ')
             if user_input == '':
-                print('Input complete')
                 break
             match_list.append(user_input)
-        print(match_list)
 
         self._calculate(line_input=match_list)
 

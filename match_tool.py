@@ -1,6 +1,5 @@
 import click
 from match_calculator import MatchCalculator
-from tests.test_match_calculator import TestMatchCalculator as tmc
 
 @click.group()
 def cli():
@@ -14,25 +13,18 @@ def file(path):
         click.echo(f"Path {path} is not a valid path.")
 
     try:
-        file = open(path, "r")
         mc = MatchCalculator()
-        mc.read(file)
+        mc.read(path)
         results = mc.get_match_results()
         click.echo(results)
-        file.close()
-    except:
-        click.echo("No file with that name.")
+    except Exception as e:
+        click.echo(e)
+        click.echo("Please enter valid file path!")
 
 @cli.command()
-@click.option(help='One match result passed in as a cmd line input')
-def line():
+@click.option('--option', help='Input a series of match results')
+def line(option):
     mc = MatchCalculator()
     mc.line()
     results = mc.get_match_results()
     click.echo(results)
-
-@cli.command()
-@click.option('-r', '--run', type=str, help='Run tests for all functions',
-              default='run')
-def test(run):
-    tmc.run()
