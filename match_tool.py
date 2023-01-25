@@ -1,5 +1,6 @@
 import click
-from match_calculator import MatchCalculator as mc
+from match_calculator import MatchCalculator
+from tests.test_match_calculator import TestMatchCalculator as tmc
 
 @click.group()
 def cli():
@@ -14,13 +15,24 @@ def file(path):
 
     try:
         file = open(path, "r")
-        results = mc.calculate(file)
+        mc = MatchCalculator()
+        mc.read(file)
+        results = mc.get_match_results()
         click.echo(results)
+        file.close()
     except:
         click.echo("No file with that name.")
 
+@cli.command()
+@click.option(help='One match result passed in as a cmd line input')
+def line():
+    mc = MatchCalculator()
+    mc.line()
+    results = mc.get_match_results()
+    click.echo(results)
 
 @cli.command()
-@click.option('-n', '--name', type=str, help='One match result', default=None)
-def string(name):
-    click.echo(f'Hello {name}')
+@click.option('-r', '--run', type=str, help='Run tests for all functions',
+              default='run')
+def test(run):
+    tmc.run()

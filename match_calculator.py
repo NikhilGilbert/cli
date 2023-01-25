@@ -39,12 +39,21 @@ class MatchCalculator:
 
         file.close()
 
-    def line(self, line: str):
+    def line(self):
         """
         This function is called in the cli when someone passes and input through the cmd line
         :param line: A string input that
         """
-        self._calculate(line_input=line)
+        match_list = []
+        while True:
+            user_input = input('Enter a match result with format:("Team" "Score", "Team" "Score") [Press Enter to exit]: ')
+            if user_input == '':
+                print('Input complete')
+                break
+            match_list.append(user_input)
+        print(match_list)
+
+        self._calculate(line_input=match_list)
 
     def _calculate_match_result(self, result: str):
         """
@@ -73,7 +82,7 @@ class MatchCalculator:
             self._match_table[team_one_name] += 1
             self._match_table[team_two_name] += 1
 
-    def _calculate(self, file_input=[], line_input=""):
+    def _calculate(self, file_input=[], line_input=[]):
         """
         This function process the input and passes it to the score calculation logic
         :param file_input: Input that is a list of matches drawn from a file
@@ -84,7 +93,8 @@ class MatchCalculator:
             for match in file_input:
                 self._calculate_match_result(match)
         else:
-            self._calculate_match_result(line_input)
+            for line in line_input:
+                self._calculate_match_result(line)
 
     def _sort_match_table(self) -> list:
         """
