@@ -15,14 +15,12 @@ class MatchCalculator:
     """
 
     _match_table = {}
-    league = None
 
-    def __init__(self, league="generic"):
+    def __init__(self):
         """
         Initialise Match Calculator class
         :param league: The name of the league
         """
-        self.league = league
 
     def read(self, file_path: str):
         """

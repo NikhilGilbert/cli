@@ -6,7 +6,7 @@ def cli():
     pass
 
 @cli.command()
-@click.option('-p', '--path', type=str, help='Path to match results file', default=None)
+@click.option('-p', '--path', type=str, help='Input path to match results file', default='tests/matches_original.txt')
 def file(path):
     if path is None:
         click.echo("matchcalc Error: Please input a file path with your match results.")
