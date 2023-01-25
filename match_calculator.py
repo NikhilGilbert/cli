@@ -15,14 +15,12 @@ class MatchCalculator:
     """
 
     _match_table = {}
-    league = None
 
-    def __init__(self, league="generic"):
+    def __init__(self):
         """
         Initialise Match Calculator class
         :param league: The name of the league
         """
-        self.league = league
 
     def read(self, file_path: str):
         """
@@ -37,12 +35,21 @@ class MatchCalculator:
 
         self._calculate(file_input=match_list)
 
-    def line(self, line: str):
+        file.close()
+
+    def line(self):
         """
         This function is called in the cli when someone passes and input through the cmd line
         :param line: A string input that
         """
-        self._calculate(line_input=line)
+        match_list = []
+        while True:
+            user_input = input('Enter a match result with format:("Team" "Score", "Team" "Score") [Press Enter to exit]: ')
+            if user_input == '':
+                break
+            match_list.append(user_input)
+
+        self._calculate(line_input=match_list)
 
     def _calculate_match_result(self, result: str):
         """
@@ -71,7 +78,7 @@ class MatchCalculator:
             self._match_table[team_one_name] += 1
             self._match_table[team_two_name] += 1
 
-    def _calculate(self, file_input=[], line_input=""):
+    def _calculate(self, file_input=[], line_input=[]):
         """
         This function process the input and passes it to the score calculation logic
         :param file_input: Input that is a list of matches drawn from a file
@@ -82,7 +89,8 @@ class MatchCalculator:
             for match in file_input:
                 self._calculate_match_result(match)
         else:
-            self._calculate_match_result(line_input)
+            for line in line_input:
+                self._calculate_match_result(line)
 
     def _sort_match_table(self) -> list:
         """
@@ -116,6 +124,5 @@ class MatchCalculator:
             else:
                 match_results += f'{position_count}. {sorted_match_table[i][0]}, {sorted_match_table[i][1]} pts\n'
                 carry += 1
-
 
         return match_results
