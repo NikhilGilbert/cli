@@ -22,7 +22,7 @@ def file(path):
         click.echo("Please enter valid file path!")
 
 @cli.command()
-@click.option('--option', help='Input a series of match results')
+@click.option('--option', help='Input a series of match results line by line')
 def line(option):
     mc = MatchCalculator()
     mc.line()

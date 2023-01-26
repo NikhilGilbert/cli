@@ -1,6 +1,6 @@
 ### Match CLI Tool
 #### Description
-This is a command line interface for calculating team rankings in a sports league
+This is a command line interface for calculating team rankings in a sports league.
 
 #### Setup
 You can install this in one of two ways:
@@ -13,5 +13,7 @@ You can install this in one of two ways:
 #### Usage
 Please confirm installation by calling the command `match`
 You can use this tool in one of two ways:
-1. By parsing a .txt file: `match file -p match_results.txt`
-2. By inputing the results line by line: `match line`
+1. By parsing a .txt file: `match file -p match_results.txt`, 
+   please see https://github.com/NikhilGilbert/cli/blob/master/tests/matches_original.txt for example text
+2. By inputing the results line by line: `match line` 
+   using the format `team_1:str score:int, team_2:str score:int`
