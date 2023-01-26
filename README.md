@@ -17,6 +17,7 @@ You can install this in one of two ways:
 </ol>
    
 #### Usage
+
 Please confirm installation by calling the command `match`. <br>
 You can use this tool in one of two ways:
 <ol>
@@ -26,3 +27,8 @@ You can use this tool in one of two ways:
    Input the match result when prompted using the format: <br>
     <code>team_1:str score:int, team_2:str score:int</code></li>
 </ol>
+
+#### Tests
+
+Run the following command for unit tests if you installed from source: <br>
+From source folder: <code>python -m unittest tests.test_match_calculator.TestMatchCalculator.test_read</code>
