@@ -6,7 +6,7 @@ def cli():
     pass
 
 @cli.command()
-@click.option('-p', '--path', type=str, help='Input path to match results file', default='tests/matches_original.txt')
+@click.option('-p', '--path', type=str, help='Input path to match results file')
 def file(path):
     if path is None:
         click.echo("matchcalc Error: Please input a file path with your match results.")
@@ -22,7 +22,7 @@ def file(path):
         click.echo("Please enter valid file path!")
 
 @cli.command()
-@click.option('--option', help='Input a series of match results')
+@click.option('--option', help='Input a series of match results line by line')
 def line(option):
     mc = MatchCalculator()
     mc.line()
